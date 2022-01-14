@@ -1,8 +1,11 @@
+pragma solidity ^0.7.0;
+pragma experimental ABIEncoderV2;
+
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
-pragma solidity ^0.7.0;
 
-pragma experimental ABIEncoderV2;
+
+
 
 import "./Utils.sol";
 import "./Ownable.sol";

@@ -3,11 +3,14 @@ pragma solidity ^0.7.0;
 // SPDX-License-Identifier: UNLICENSED
 
 
+
 /**
  * @dev Interface of the ERC20 standard as defined in the EIP. Does not include
  * the optional functions; to access them see {ERC20Detailed}.
  */
-interface IERC20 {
+interface MintableIERC20Test {
+    function mint(address to, uint256 amount) external;
+
     /**
      * @dev Returns the amount of tokens in existence.
      */

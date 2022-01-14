@@ -1,22 +1,24 @@
+pragma solidity ^0.7.0;
+pragma experimental ABIEncoderV2;
+
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
-pragma solidity ^0.7.0;
 
-pragma experimental ABIEncoderV2;
+
+
 
 import "./PlonkCore.sol";
 
 // Hardcoded constants to avoid accessing store
 contract KeysWithPlonkVerifier is VerifierWithDeserialize {
 
-    uint256 constant VK_TREE_ROOT = 0x27b59e90e3e7a8232ef7af89bfb6bde89dc22ed5918db6ecf2028997ffedbe2f;
+    uint256 constant VK_TREE_ROOT = 0x21bb757314c593160f846c4ba67709f1860439e7a5a9403184309e9e6ff06066;
     uint8 constant VK_MAX_INDEX = 3;
 
     function getVkAggregated(uint32 _proofs) internal pure returns (VerificationKey memory vk) {
         if (_proofs == uint32(1)) { return getVkAggregated1(); }
         else if (_proofs == uint32(4)) { return getVkAggregated4(); }
         else if (_proofs == uint32(8)) { return getVkAggregated8(); }
-        else if (_proofs == uint32(18)) { return getVkAggregated18(); }
     }
 
     
@@ -223,80 +225,6 @@ contract KeysWithPlonkVerifier is VerifierWithDeserialize {
         vk.copy_permutation_commitments[3] = PairingsBn254.new_g1(
             0x1dbd386fe258366222becc570a7f6405b25ff52818b93bdd54eaa20a6b22025a,
             0x2b2b4e978ac457d752f50b02609bd7d2054286b963821b2ec7cd3dd1507479fa
-        );
-        vk.copy_permutation_non_residues[0] = PairingsBn254.new_fr(
-            0x0000000000000000000000000000000000000000000000000000000000000005
-        );
-        vk.copy_permutation_non_residues[1] = PairingsBn254.new_fr(
-            0x0000000000000000000000000000000000000000000000000000000000000007
-        );
-        vk.copy_permutation_non_residues[2] = PairingsBn254.new_fr(
-            0x000000000000000000000000000000000000000000000000000000000000000a
-        );
-
-        vk.g2_x = PairingsBn254.new_g2(
-            [0x260e01b251f6f1c7e7ff4e580791dee8ea51d87a358e038b4efe30fac09383c1,
-            0x0118c4d5b837bcc2bc89b5b398b5974e9f5944073b32078b7e231fec938883b0],
-            [0x04fc6369f7110fe3d25156c1bb9a72859cf2a04641f99ba4ee413c80da6a5fe4,
-            0x22febda3c0c0632a56475b4214e5615e11e6dd3f96e6cea2854a87d4dacc5e55]
-        );
-    }
-    
-    function getVkAggregated18() internal pure returns(VerificationKey memory vk) {
-        vk.domain_size = 33554432;
-        vk.num_inputs = 1;
-        vk.omega = PairingsBn254.new_fr(0x0d94d63997367c97a8ed16c17adaae39262b9af83acb9e003f94c217303dd160);
-        vk.gate_setup_commitments[0] = PairingsBn254.new_g1(
-            0x0eab7c0217fbc357eb9e2622da6e5df9a99e5fa8dbaaf6b45a7136bbc49704c0,
-            0x00199f1c9e2ef5efbec5e3792cb6db0d6211e2da57e2e5a7cf91fb4037bd0013
-        );
-        vk.gate_setup_commitments[1] = PairingsBn254.new_g1(
-            0x020c5ecdbb37b9f99b131cdfd0fec8c5565985599093db03d85a9bcd75a8a186,
-            0x0be3b767834382739f1309adedb540ce5261b7038c168d32619a6e6333974b1b
-        );
-        vk.gate_setup_commitments[2] = PairingsBn254.new_g1(
-            0x092fc8636803f28250ac33b8ea688b37cf0718f83c82a1ce7bca70e7c8643b93,
-            0x10c907fcb34fb6e9d4e334428e8226ba84e5977a7dc1ada2509cc6cf445123ca
-        );
-        vk.gate_setup_commitments[3] = PairingsBn254.new_g1(
-            0x1f66b77eaae034cf3646e0c32418a1dfecb3bf090cc271aad0d64ba327758b29,
-            0x2b8766fbe83c45b39e274998a000cf59e7332800025e7af711368c6b7ea11cd9
-        );
-        vk.gate_setup_commitments[4] = PairingsBn254.new_g1(
-            0x017336a15f6e61def3ec02f139a0972c4272e126ac40d49ed10d447db6857643,
-            0x22cc7cb62310a031acd86dd1a9ea18ee55e1b6a4fbf1c2d64ca9a7cc6458ed7a
-        );
-        vk.gate_setup_commitments[5] = PairingsBn254.new_g1(
-            0x057992ff5d056557b795ab7e6964fab546fdcd8b5c1d3718e4f619e1091ef9a0,
-            0x026916de04486781c504fb054e0b3755dd4836b610973e0ca092b35810ed3698
-        );
-        vk.gate_setup_commitments[6] = PairingsBn254.new_g1(
-            0x252a53377145970214c9af5cd95c5fdd72e4d890b96d5ab31ef7736b2280aaa3,
-            0x2a1ccbea423d1a58325c4d0e5aa01a6a2a7c7fbaa61fb8f3669f720dfb4dfd4d
-        );
-        vk.gate_selector_commitments[0] = PairingsBn254.new_g1(
-            0x17da1e8102c91916c778e89d737bdc8a14f4dfcf14fc89896f921dfc81e98556,
-            0x1b9571239471b65bc5d4bcc3b1b3831bcc6986ad4d1417292dc3067ae632b796
-        );
-        vk.gate_selector_commitments[1] = PairingsBn254.new_g1(
-            0x242b5b8848746eb790629cf0853e256249d83cad8e189d474ed3a5c56b5a92be,
-            0x2ca4e4882f0d7408ba134458945a2dd7cbced64e735fd42c9204eaf8608c58cc
-        );
-        vk.copy_permutation_commitments[0] = PairingsBn254.new_g1(
-            0x281ccb20cea7001ae0d3ef5deedc46db687f1493cd77631dc2c16275b96f677a,
-            0x24bede6b53ee4762939dbabb5947023d3ab31b00a1d14bcb6a5da69d7ce0d67e
-        );
-        vk.copy_permutation_commitments[1] = PairingsBn254.new_g1(
-            0x1e72df4c2223fb15e72862350f51994b7f381a829a00b21535b04e8c342c15e7,
-            0x22b7bb45c2e3b957952824beee1145bfcb5d2c575636266ad44032c1ae24e1ea
-        );
-        vk.copy_permutation_commitments[2] = PairingsBn254.new_g1(
-            0x0059ea736670b355b3b6479db53d9b19727aa128514dee7d6c6788e80233452f,
-            0x24718998fb0ff667c66457f6558ff028352b2d55cb86a07a0c11fc3c2753df38
-        );
-        vk.copy_permutation_commitments[3] = PairingsBn254.new_g1(
-            0x0bee5ac3770c7603b2ccbc9e10a0ceafa231e77dde3fd6b9d514958ae7c200e8,
-            0x11339336bbdafda32635c143b7bd0c4cdb7b7948489d75240c89ca2a440ef39c
         );
         vk.copy_permutation_non_residues[0] = PairingsBn254.new_fr(
             0x0000000000000000000000000000000000000000000000000000000000000005

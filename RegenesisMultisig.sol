@@ -1,8 +1,11 @@
+pragma solidity ^0.7.0;
+pragma experimental ABIEncoderV2;
+
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
-pragma solidity ^0.7.0;
 
-pragma experimental ABIEncoderV2;
+
+
 
 import "./Ownable.sol";
 import "./Config.sol";
@@ -50,7 +53,7 @@ contract RegenesisMultisig is Ownable, Config {
         require(_newRootHash == candidateNewRootHash, "3");
 
         address payable[SECURITY_COUNCIL_MEMBERS_NUMBER] memory SECURITY_COUNCIL_MEMBERS = [
-            $(SECURITY_COUNCIL_MEMBERS)
+            0x22C3F9177F485bF9a058cE4C7253Da81a59495Db,0x56dF84566a67e87808A73dA0Be61a40bda3e2AFA,0xCE004d039cD86b08274FC453bd5536E6e9F6Fac7
         ];
         for (uint256 id = 0; id < SECURITY_COUNCIL_MEMBERS_NUMBER; ++id) {
             if (SECURITY_COUNCIL_MEMBERS[id] == msg.sender) {

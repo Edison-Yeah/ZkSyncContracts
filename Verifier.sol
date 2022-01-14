@@ -1,7 +1,10 @@
-// SPDX-License-Identifier: MIT OR Apache-2.0
-
 pragma solidity ^0.7.0;
 pragma experimental ABIEncoderV2;
+
+// SPDX-License-Identifier: MIT OR Apache-2.0
+
+
+
 
 import "./KeysWithPlonkVerifier.sol";
 import "./Config.sol";
@@ -23,16 +26,6 @@ contract Verifier is KeysWithPlonkVerifier, KeysWithPlonkVerifierOld, Config {
         uint256[] memory _individualVksInputs,
         uint256[16] memory _subproofsLimbs
     ) external view returns (bool) {
-        // #if DUMMY_VERIFIER
-        uint256 oldGasValue = gasleft();
-        // HACK: ignore warnings from unused variables
-        abi.encode(_recursiveInput, _proof, _vkIndexes, _individualVksInputs, _subproofsLimbs);
-        uint256 tmp;
-        while (gasleft() + 500000 > oldGasValue) {
-            tmp += 1;
-        }
-        return true;
-        // #else
         for (uint256 i = 0; i < _individualVksInputs.length; ++i) {
             uint256 commitment = _individualVksInputs[i];
             _individualVksInputs[i] = commitment & INPUT_MASK;
@@ -50,7 +43,6 @@ contract Verifier is KeysWithPlonkVerifier, KeysWithPlonkVerifierOld, Config {
                 _subproofsLimbs,
                 vk
             );
-        // #endif
     }
 
     function verifyExitProof(

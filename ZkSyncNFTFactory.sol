@@ -1,6 +1,8 @@
+pragma solidity ^0.7.0;
+
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
-pragma solidity ^0.7.0;
+
 
 import "./NFTFactory.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";

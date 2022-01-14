@@ -3,11 +3,14 @@ pragma solidity ^0.7.0;
 // SPDX-License-Identifier: UNLICENSED
 
 
+
 /**
  * @dev Interface of the ERC20 standard as defined in the EIP. Does not include
  * the optional functions; to access them see {ERC20Detailed}.
  */
-interface IERC20 {
+interface MintableIERC20NoTransferReturnValueTest {
+    function mint(address to, uint256 amount) external;
+
     /**
      * @dev Returns the amount of tokens in existence.
      */
@@ -25,7 +28,7 @@ interface IERC20 {
      *
      * Emits a {Transfer} event.
      */
-    function transfer(address recipient, uint256 amount) external returns (bool);
+    function transfer(address recipient, uint256 amount) external;
 
     /**
      * @dev Returns the remaining number of tokens that `spender` will be
@@ -65,7 +68,7 @@ interface IERC20 {
         address sender,
         address recipient,
         uint256 amount
-    ) external returns (bool);
+    ) external;
 
     /**
      * @dev Emitted when `value` tokens are moved from one account (`from`) to
