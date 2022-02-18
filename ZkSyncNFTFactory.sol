@@ -5,7 +5,7 @@ pragma solidity ^0.7.0;
 
 
 import "./NFTFactory.sol";
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "./ERC721.sol";
 
 contract ZkSyncNFTFactory is ERC721, NFTFactory {
     uint8 constant ADDRESS_FOOTPRINT_OFFSET = 0;
